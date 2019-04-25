@@ -19,6 +19,7 @@ package com.uber.profiling;
 import com.uber.profiling.reporters.ConsoleOutputReporter;
 import com.uber.profiling.reporters.FileOutputReporter;
 import com.uber.profiling.reporters.KafkaOutputReporter;
+import com.uber.profiling.reporters.KafkaOutputReporterAvro;
 import com.uber.profiling.util.AgentLogger;
 import com.uber.profiling.util.ClassAndMethod;
 import com.uber.profiling.util.ClassMethodArgument;
@@ -313,6 +314,15 @@ public class Arguments {
                 } else if (reporter instanceof FileOutputReporter) {
                     FileOutputReporter fileOutputReporter = (FileOutputReporter)reporter;
                     fileOutputReporter.setDirectory(outputDir);
+                } else if (reporter instanceof KafkaOutputReporterAvro) {
+                    KafkaOutputReporterAvro kafkaOutputReporterAvro = (KafkaOutputReporterAvro) reporter;
+                    if (brokerList != null && !brokerList.isEmpty()) {
+                        kafkaOutputReporterAvro.setBrokerList(brokerList);
+                    }
+                    kafkaOutputReporterAvro.setSyncMode(syncMode);
+                    if (topicPrefix != null && !topicPrefix.isEmpty()) {
+                        kafkaOutputReporterAvro.setTopicPrefix(topicPrefix);
+                    }
                 }
                 return reporter;
             } catch (Throwable e) {

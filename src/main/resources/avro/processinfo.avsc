@@ -1,0 +1,39 @@
+{
+  "type" : "record",
+  "name" : "ProcessInfo",
+  "namespace" : "com.jvmprofiler",
+  "fields" : [ {
+    "name" : "jvmInputArguments",
+    "type" : "string"
+  }, {
+    "name" : "cmdline",
+    "type" : "string"
+  }, {
+    "name" : "jvmClassPath",
+    "type" : "string"
+  }, {
+    "name" : "appId",
+    "type" : "string"
+  }, {
+    "name" : "name",
+    "type" : "string"
+  }, {
+    "name" : "host",
+    "type" : "string"
+  }, {
+    "name" : "processUuid",
+    "type" : "string"
+  }, {
+    "name" : "agentVersion",
+    "type" : "string"
+  }, {
+    "name" : "appClass",
+    "type" : "string"
+  }, {
+    "name" : "epochMillis",
+    "type" : "long"
+  }, {
+    "name" : "appJar",
+    "type" : "string"
+  } ]
+}

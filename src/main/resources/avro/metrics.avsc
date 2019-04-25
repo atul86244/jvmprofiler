@@ -1,0 +1,118 @@
+{
+  "type" : "record",
+  "name" : "JVMMetrics",
+  "namespace" : "com.jvmprofiler",
+  "version" :"1",
+  "fields" : [ {
+    "name" : "nonHeapMemoryTotalUsed",
+    "type" : "double"
+  }, {
+    "name" : "bufferPools",
+    "type" : {
+      "type" : "array",
+      "items" : {
+        "type" : "record",
+        "name" : "bufferPools",
+        "fields" : [ {
+          "name" : "totalCapacity",
+          "type" : "long"
+        }, {
+          "name" : "name",
+          "type" : "string"
+        }, {
+          "name" : "count",
+          "type" : "long"
+        }, {
+          "name" : "memoryUsed",
+          "type" : "long"
+        } ]
+      }
+    }
+  }, {
+    "name" : "heapMemoryTotalUsed",
+    "type" : "double"
+  }, {
+    "name" : "epochMillis",
+    "type" : "long"
+  }, {
+    "name" : "nonHeapMemoryCommitted",
+    "type" : "double"
+  }, {
+    "name" : "heapMemoryCommitted",
+    "type" : "double"
+  }, {
+    "name" : "memoryPools",
+    "type" : {
+      "type" : "array",
+      "items" : {
+        "type" : "record",
+        "name" : "memoryPools",
+        "fields" : [ {
+          "name" : "peakUsageMax",
+          "type" : "long"
+        }, {
+          "name" : "usageMax",
+          "type" : "long"
+        }, {
+          "name" : "peakUsageUsed",
+          "type" : "long"
+        }, {
+          "name" : "name",
+          "type" : "string"
+        }, {
+          "name" : "peakUsageCommitted",
+          "type" : "long"
+        }, {
+          "name" : "usageUsed",
+          "type" : "long"
+        }, {
+          "name" : "type",
+          "type" : "string"
+        }, {
+          "name" : "usageCommitted",
+          "type" : "long"
+        } ]
+      }
+    }
+  }, {
+    "name" : "processCpuLoad",
+    "type" : "double"
+  }, {
+    "name" : "systemCpuLoad",
+    "type" : "double"
+  }, {
+    "name" : "processCpuTime",
+    "type" : "long"
+  }, {
+    "name" : "appId",
+    "type" : "string"
+  }, {
+    "name" : "name",
+    "type" : "string"
+  }, {
+    "name" : "host",
+    "type" : "string"
+  }, {
+    "name" : "processUuid",
+    "type" : "string"
+  }, {
+    "name" : "gc",
+    "type" : {
+      "type" : "array",
+      "items" : {
+        "type" : "record",
+        "name" : "gc",
+        "fields" : [ {
+          "name" : "collectionTime",
+          "type" : "long"
+        }, {
+          "name" : "name",
+          "type" : "string"
+        }, {
+          "name" : "collectionCount",
+          "type" : "long"
+        } ]
+      }
+    }
+  } ]
+}

@@ -95,7 +95,11 @@ public class MethodArgumentProfiler extends ProcessInfoBase implements Profiler 
                 Map<String, Object> metricMap = new HashMap<>(commonMap);
                 metricMap.put("metricName", entry.getKey().getMetricName());
                 metricMap.put("metricValue", (double) entry.getValue().get());
-                reporter.report(PROFILER_NAME, metricMap);
+                try {
+                    reporter.report(PROFILER_NAME, metricMap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

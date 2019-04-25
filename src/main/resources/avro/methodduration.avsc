@@ -1,0 +1,33 @@
+{
+  "type" : "record",
+  "name" : "MethodDuration",
+  "namespace" : "com.jvmprofiler",
+  "fields" : [ {
+    "name" : "metricName",
+    "type" : "string"
+  }, {
+    "name" : "processName",
+    "type" : "string"
+  }, {
+    "name" : "appId",
+    "type" : "string"
+  }, {
+    "name" : "host",
+    "type" : "string"
+  }, {
+    "name" : "processUuid",
+    "type" : "string"
+  }, {
+    "name" : "metricValue",
+    "type" : "long"
+  }, {
+    "name" : "methodName",
+    "type" : "string"
+  }, {
+    "name" : "className",
+    "type" : "string"
+  }, {
+    "name" : "epochMillis",
+    "type" : "long"
+  } ]
+}

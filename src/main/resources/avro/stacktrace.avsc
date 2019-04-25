@@ -1,0 +1,39 @@
+{
+  "type" : "record",
+  "name" : "Stacktrace",
+  "namespace" : "com.jvmprofiler",
+  "fields" : [ {
+    "name" : "stacktrace",
+    "type" : {
+      "type" : "array",
+      "items" : "string"
+    }
+  }, {
+    "name" : "endEpoch",
+    "type" : "long"
+  }, {
+    "name" : "appId",
+    "type" : "string"
+  }, {
+    "name" : "host",
+    "type" : "string"
+  }, {
+    "name" : "name",
+    "type" : "string"
+  }, {
+    "name" : "processUuid",
+    "type" : "string"
+  }, {
+    "name" : "threadState",
+    "type" : "string"
+  }, {
+    "name" : "count",
+    "type" : "long"
+  }, {
+    "name" : "startEpoch",
+    "type" : "long"
+  }, {
+    "name" : "threadName",
+    "type" : "string"
+  } ]
+}

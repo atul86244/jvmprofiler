@@ -95,25 +95,41 @@ public class MethodDurationProfiler extends ProcessInfoBase implements Profiler 
                 Map<String, Object> metricMap = new HashMap<>(commonMap);
                 metricMap.put("metricName", entry.getKey().getMetricName() + ".count");
                 metricMap.put("metricValue", (double) entry.getValue().getCount());
-                reporter.report(PROFILER_NAME, metricMap);
+                try {
+                    reporter.report(PROFILER_NAME, metricMap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             {
                 Map<String, Object> metricMap = new HashMap<>(commonMap);
                 metricMap.put("metricName", entry.getKey().getMetricName() + ".sum");
                 metricMap.put("metricValue", (double) entry.getValue().getSum());
-                reporter.report(PROFILER_NAME, metricMap);
+                try {
+                    reporter.report(PROFILER_NAME, metricMap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             {
                 Map<String, Object> metricMap = new HashMap<>(commonMap);
                 metricMap.put("metricName", entry.getKey().getMetricName() + ".min");
                 metricMap.put("metricValue", (double) entry.getValue().getMin());
-                reporter.report(PROFILER_NAME, metricMap);
+                try {
+                    reporter.report(PROFILER_NAME, metricMap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             {
                 Map<String, Object> metricMap = new HashMap<>(commonMap);
                 metricMap.put("metricName", entry.getKey().getMetricName() + ".max");
                 metricMap.put("metricValue", (double) entry.getValue().getMax());
-                reporter.report(PROFILER_NAME, metricMap);
+                try {
+                    reporter.report(PROFILER_NAME, metricMap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

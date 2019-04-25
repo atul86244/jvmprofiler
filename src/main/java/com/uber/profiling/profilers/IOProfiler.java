@@ -94,7 +94,11 @@ public class IOProfiler extends ProcessInfoBase implements Profiler {
         map.put("stat", cpuTime);
         
         if (reporter != null) {
-            reporter.report(PROFILER_NAME, map);
+            try {
+                reporter.report(PROFILER_NAME, map);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

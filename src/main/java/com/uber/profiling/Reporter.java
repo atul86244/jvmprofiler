@@ -19,7 +19,7 @@ package com.uber.profiling;
 import java.util.Map;
 
 public interface Reporter {
-    void report(String profilerName, Map<String, Object> metrics);
+    void report(String profilerName, Map<String, Object> metrics) throws Exception;
 
     void close();
 }

@@ -216,7 +216,11 @@ public class CpuAndMemoryProfiler extends ProcessInfoBase implements Profiler {
         }
 
         if (reporter != null) {
-            reporter.report(PROFILER_NAME, map);
+            try {
+                reporter.report(PROFILER_NAME, map);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -115,7 +115,11 @@ public class StacktraceReporterProfiler extends ProcessInfoBase implements Profi
             
             map.put("count", entry.getValue().get());
 
-            reporter.report(PROFILER_NAME, map);
+            try {
+                reporter.report(PROFILER_NAME, map);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

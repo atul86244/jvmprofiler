@@ -113,7 +113,11 @@ public class ProcessInfoProfiler extends ProcessInfoBase implements Profiler {
             map.put("cmdline", cmdline);
 
             if (reporter != null) {
-                reporter.report(PROFILER_NAME, map);
+                try {
+                    reporter.report(PROFILER_NAME, map);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } else {
             List<String> jvmInputArgumentsFragements = com.uber.profiling.util.StringUtils.splitByLength(jvmInputArgumentsToReport, Constants.MAX_STRING_LENGTH);
@@ -128,7 +132,11 @@ public class ProcessInfoProfiler extends ProcessInfoBase implements Profiler {
                 fragmentMap.put("jvmInputArguments", entry);
 
                 if (reporter != null) {
-                    reporter.report(PROFILER_NAME, fragmentMap);
+                    try {
+                        reporter.report(PROFILER_NAME, fragmentMap);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -137,7 +145,11 @@ public class ProcessInfoProfiler extends ProcessInfoBase implements Profiler {
                 fragmentMap.put("jvmClassPath", entry);
 
                 if (reporter != null) {
-                    reporter.report(PROFILER_NAME, fragmentMap);
+                    try {
+                        reporter.report(PROFILER_NAME, fragmentMap);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -146,7 +158,11 @@ public class ProcessInfoProfiler extends ProcessInfoBase implements Profiler {
                 fragmentMap.put("cmdline", entry);
 
                 if (reporter != null) {
-                    reporter.report(PROFILER_NAME, fragmentMap);
+                    try {
+                        reporter.report(PROFILER_NAME, fragmentMap);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
