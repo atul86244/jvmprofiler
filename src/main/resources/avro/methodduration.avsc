@@ -9,6 +9,12 @@
     "name" : "processName",
     "type" : "string"
   }, {
+    "name" : "graphiteSchema",
+    "type" : "string"
+  }, {
+    "name" : "profiler",
+    "type" : "string"
+  }, {
     "name" : "appId",
     "type" : "string"
   }, {

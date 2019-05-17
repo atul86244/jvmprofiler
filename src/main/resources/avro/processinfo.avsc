@@ -9,6 +9,12 @@
     "name" : "cmdline",
     "type" : "string"
   }, {
+    "name" : "graphiteSchema",
+    "type" : "string"
+  }, {
+    "name" : "profiler",
+    "type" : "string"
+  }, {
     "name" : "jvmClassPath",
     "type" : "string"
   }, {

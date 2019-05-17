@@ -15,6 +15,12 @@
     "name" : "appId",
     "type" : "string"
   }, {
+    "name" : "graphiteSchema",
+    "type" : "string"
+  }, {
+    "name" : "profiler",
+    "type" : "string"
+  }, {
     "name" : "host",
     "type" : "string"
   }, {

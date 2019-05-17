@@ -3,6 +3,7 @@ package com.uber.profiling.reporters;
 import com.jvmprofiler.*;
 import com.uber.profiling.Reporter;
 import com.uber.profiling.util.JsonUtils;
+import com.uber.profiling.util.GraphiteSchema;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -40,6 +41,7 @@ public class KafkaOutputReporterAvro implements Reporter {
     @Override
     public void report(String profilerName, Map<String, Object> metrics) throws Exception {
 
+        String graphite_schema = GraphiteSchema.get_schema();
 
         String json = JsonUtils.serialize(metrics);
 
@@ -52,7 +54,8 @@ public class KafkaOutputReporterAvro implements Reporter {
         props.put("batch.size", 16384);
         props.put("linger.ms", 0);
         props.put("buffer.memory", 16384000);
-        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        //props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put("key.serializer", KafkaAvroSerializer.class.getName() );
         props.put("value.serializer", KafkaAvroSerializer.class.getName());
         props.put("schema.registry.url", "http://10.227.215.228:8081");
         if (syncMode) {
@@ -132,10 +135,12 @@ public class KafkaOutputReporterAvro implements Reporter {
                         .setHost(obj.getString("host"))
                         .setProcessUuid(obj.getString("processUuid"))
                         .setGc(gcs)
+                        .setGraphiteSchema(graphite_schema)
+                        .setProfiler(profilerName)
                         .build();
 
                 Future<RecordMetadata> future1 = producer_CpuAndMemory.send(
-                        new ProducerRecord<String, JVMMetrics>(topicName, jvmmetrics));
+                        new ProducerRecord<String, JVMMetrics>(topicName, obj.getString("appId"), jvmmetrics));
                 if (syncMode) {
                     producer_CpuAndMemory.flush();
                     try {
@@ -161,10 +166,12 @@ public class KafkaOutputReporterAvro implements Reporter {
                         .setAppId(obj.getString("appId"))
                         .setHost(obj.getString("host"))
                         .setProcessUuid(obj.getString("processUuid"))
+                        .setGraphiteSchema(graphite_schema)
+                        .setProfiler(profilerName)
                         .build();
 
                 Future<RecordMetadata> future2 = producer_MethodArgument.send(
-                        new ProducerRecord<String, MethodArgument>(topicName, methodargumentmetrics));
+                        new ProducerRecord<String, MethodArgument>(topicName, obj.getString("appId"), methodargumentmetrics));
                 if (syncMode) {
                     producer_MethodArgument.flush();
                     try {
@@ -190,10 +197,12 @@ public class KafkaOutputReporterAvro implements Reporter {
                         .setAppId(obj.getString("appId"))
                         .setHost(obj.getString("host"))
                         .setProcessUuid(obj.getString("processUuid"))
+                        .setGraphiteSchema(graphite_schema)
+                        .setProfiler(profilerName)
                         .build();
 
                 Future<RecordMetadata> future3 = producer_MethodDuration.send(
-                        new ProducerRecord<String, MethodDuration>(topicName, methoddurationmetrics));
+                        new ProducerRecord<String, MethodDuration>(topicName, obj.getString("appId"), methoddurationmetrics));
                 if (syncMode) {
                     producer_MethodDuration.flush();
                     try {
@@ -221,10 +230,12 @@ public class KafkaOutputReporterAvro implements Reporter {
                         .setName(obj.getString("name"))
                         .setHost(obj.getString("host"))
                         .setProcessUuid(obj.getString("processUuid"))
+                        .setGraphiteSchema(graphite_schema)
+                        .setProfiler(profilerName)
                         .build();
 
                 Future<RecordMetadata> future4 = producer_ProcessInfo.send(
-                        new ProducerRecord<String, ProcessInfo>(topicName, processinfometrics));
+                        new ProducerRecord<String, ProcessInfo>(topicName, obj.getString("appId"), processinfometrics));
                 if (syncMode) {
                     producer_ProcessInfo.flush();
                     try {
@@ -261,10 +272,12 @@ public class KafkaOutputReporterAvro implements Reporter {
                         .setName(obj.getString("name"))
                         .setHost(obj.getString("host"))
                         .setProcessUuid(obj.getString("processUuid"))
+                        .setGraphiteSchema(graphite_schema)
+                        .setProfiler(profilerName)
                         .build();
 
                 Future<RecordMetadata> future5 = producer_Stacktrace.send(
-                        new ProducerRecord<String, Stacktrace>(topicName, stacktracemetrics));
+                        new ProducerRecord<String, Stacktrace>(topicName, obj.getString("appId"), stacktracemetrics));
                 if (syncMode) {
                     producer_Stacktrace.flush();
                     try {
@@ -323,11 +336,12 @@ public class KafkaOutputReporterAvro implements Reporter {
     }
 
     public String getTopic(String profilerName) {
-        String topic = profilerTopics.getOrDefault(profilerName, null);
-        if (topic == null || topic.isEmpty()) {
-            topic = topicPrefix == null ? "" : topicPrefix;
+        String topic = "jvmprofiler_";
+       // String topic = profilerTopics.getOrDefault(profilerName, null);
+        //if (topic == null || topic.isEmpty()) {
+        //    topic = topicPrefix == null ? "" : topicPrefix;
             topic += profilerName;
-        }
+        //}
         return topic;
     }
 
