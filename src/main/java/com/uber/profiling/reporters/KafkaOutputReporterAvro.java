@@ -46,6 +46,8 @@ public class KafkaOutputReporterAvro implements Reporter {
         String json = JsonUtils.serialize(metrics);
 
         String topicName = getTopic(profilerName);
+        String schemaRegistry = brokerList.split(":",2)[0];
+        String schemaRegistryURL = String.format("http://%s:8081",schemaRegistry);
         final JSONObject obj = new JSONObject(json);
 
         Properties props = new Properties();
@@ -57,7 +59,7 @@ public class KafkaOutputReporterAvro implements Reporter {
         //props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("key.serializer", KafkaAvroSerializer.class.getName() );
         props.put("value.serializer", KafkaAvroSerializer.class.getName());
-        props.put("schema.registry.url", "http://10.227.215.228:8081");
+        props.put("schema.registry.url", schemaRegistryURL);
         if (syncMode) {
             props.put("acks", "all");
         }

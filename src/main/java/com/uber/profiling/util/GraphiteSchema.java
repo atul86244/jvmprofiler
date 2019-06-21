@@ -15,9 +15,11 @@ public class GraphiteSchema {
             String env;
             String graphite_schema;
 
+//            Scanner scanner = new Scanner(new File("/app/graphite_schema")); // path to file
             Scanner scanner = new Scanner(new File("/etc/oneops")); // path to file
 
             while (scanner.hasNextLine()) {
+//                schema = scanner.nextLine();
                 String line = scanner.nextLine();
                 if (line.contains(oneops_variable)) { // check if line has your finding word
                     schema = line.split("=")[1];
@@ -31,5 +33,6 @@ public class GraphiteSchema {
 
             graphite_schema = org+"."+assembly+"."+env+"."+platform;
             return graphite_schema;
+//            return schema;
     }
 }
